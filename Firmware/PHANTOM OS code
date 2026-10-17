@@ -1,1 +1,370 @@
+phantom_os.py
 
+
+import tkinter as tk
+from tkinter import messagebox
+from datetime import datetime
+import csv
+import os
+
+# P.H.A.N.T.O.M. OS
+# Mini paranormal investigation system
+# Desktop prototype - version 0.1
+
+BG = "#07130F"
+PANEL = "#12251C"
+GREEN = "#73FFAB"
+TEXT = "#E8FFF0"
+MUTED = "#8CA79A"
+RED = "#FF7272"
+
+LOG_FILE = "phantom_events.csv"
+
+
+class PhantomOS:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("P.H.A.N.T.O.M. OS")
+        self.root.geometry("800x480")
+        self.root.configure(bg=BG)
+        self.root.resizable(False, False)
+
+        self.running = False
+        self.start_time = None
+        self.events = []
+        self.page = "HOME"
+
+        self.setup_log()
+        self.draw()
+        self.tick()
+
+    def setup_log(self):
+        if not os.path.exists(LOG_FILE):
+            with open(LOG_FILE, "w", newline="") as file:
+                writer = csv.writer(file)
+                writer.writerow(
+                    ["Timestamp", "Event", "Elapsed Seconds"]
+                )
+
+    def label(self, parent, text, size=12,
+              color=TEXT, bold=False):
+        return tk.Label(
+            parent,
+            text=text,
+            bg=parent.cget("bg"),
+            fg=color,
+            font=(
+                "Consolas",
+                size,
+                "bold" if bold else "normal"
+            )
+        )
+
+    def button(self, parent, text, command,
+               color=PANEL, width=18):
+        return tk.Button(
+            parent,
+            text=text,
+            command=command,
+            bg=color,
+            fg=TEXT,
+            activebackground="#27513A",
+            activeforeground=GREEN,
+            font=("Consolas", 11, "bold"),
+            width=width,
+            height=2,
+            relief="flat",
+            cursor="hand2"
+        )
+
+    def clear(self):
+        for widget in self.root.winfo_children():
+            widget.destroy()
+
+    def draw(self):
+        self.clear()
+
+        header = tk.Frame(self.root, bg=BG)
+        header.pack(fill="x", padx=20, pady=12)
+
+        self.label(
+            header, "P.H.A.N.T.O.M. // MK I",
+            17, GREEN, True
+        ).pack(side="left")
+
+        self.status = self.label(
+            header, "STANDBY", 11, MUTED, True
+        )
+        self.status.pack(side="right")
+
+        tk.Frame(
+            self.root, bg="#28543C", height=2
+        ).pack(fill="x", padx=20)
+
+        nav = tk.Frame(self.root, bg=BG)
+        nav.pack(fill="x", padx=20, pady=12)
+
+        pages = [
+            "HOME", "ENVIRONMENT",
+            "MAGNETIC", "EVENTS", "SETTINGS"
+        ]
+
+        for name in pages:
+            self.button(
+                nav, name,
+                lambda p=name: self.open_page(p),
+                width=13
+            ).pack(side="left", padx=3)
+
+        self.content = tk.Frame(self.root, bg=BG)
+        self.content.pack(
+            fill="both", expand=True, padx=24
+        )
+
+        if self.page == "HOME":
+            self.home()
+        elif self.page == "ENVIRONMENT":
+            self.environment()
+        elif self.page == "MAGNETIC":
+            self.magnetic()
+        elif self.page == "EVENTS":
+            self.event_page()
+        elif self.page == "SETTINGS":
+            self.settings()
+
+        self.label(
+            self.root,
+            "PHANTOM OS v0.1  |  OFFLINE SYSTEM",
+            9, MUTED
+        ).pack(side="bottom", pady=8)
+
+    def open_page(self, page):
+        self.page = page
+        self.draw()
+
+    def home(self):
+        self.label(
+            self.content, "FIELD INVESTIGATION",
+            23, GREEN, True
+        ).pack(pady=12)
+
+        self.label(
+            self.content,
+            "Paranormal Hunting, Analysis, Navigation,"
+            "\nTracking & Observation Machine",
+            12, MUTED
+        ).pack(pady=8)
+
+        self.timer_label = self.label(
+            self.content, "00:00:00", 30, TEXT, True
+        )
+        self.timer_label.pack(pady=14)
+
+        actions = tk.Frame(self.content, bg=BG)
+        actions.pack()
+
+        self.button(
+            actions, "START / STOP",
+            self.toggle_session, width=19
+        ).pack(side="left", padx=8)
+
+        self.button(
+            actions, "MARK EVENT",
+            self.mark_event, width=19
+        ).pack(side="left", padx=8)
+
+        self.label(
+            self.content,
+            "Sensor data requires connected hardware.",
+            10, MUTED
+        ).pack(pady=14)
+
+    def environment(self):
+        self.label(
+            self.content, "ENVIRONMENT MONITOR",
+            22, GREEN, True
+        ).pack(pady=15)
+
+        readings = [
+            ("TEMPERATURE", "--.- C"),
+            ("HUMIDITY", "-- %"),
+            ("AIR PRESSURE", "---- hPa"),
+        ]
+
+        for name, value in readings:
+            line = tk.Frame(
+                self.content, bg=PANEL, padx=18, pady=9
+            )
+            line.pack(fill="x", pady=5)
+
+            self.label(
+                line, name, 12, MUTED
+            ).pack(side="left")
+
+            self.label(
+                line, value, 15, GREEN, True
+            ).pack(side="right")
+
+        self.label(
+            self.content,
+            "BME280: NOT CONNECTED",
+            11, RED
+        ).pack(pady=12)
+
+    def magnetic(self):
+        self.label(
+            self.content, "MAGNETIC FIELD SCANNER",
+            22, GREEN, True
+        ).pack(pady=18)
+
+        self.label(
+            self.content, "--.- uT",
+            35, TEXT, True
+        ).pack(pady=18)
+
+        self.label(
+            self.content,
+            "BMM150: NOT CONNECTED",
+            12, RED
+        ).pack()
+
+        self.label(
+            self.content,
+            "Magnetic measurements are not"
+            " evidence of paranormal activity.",
+            10, MUTED
+        ).pack(pady=22)
+
+    def event_page(self):
+        self.label(
+            self.content, "INVESTIGATION EVENTS",
+            21, GREEN, True
+        ).pack(pady=10)
+
+        event_list = tk.Listbox(
+            self.content,
+            bg=PANEL,
+            fg=TEXT,
+            selectbackground="#28543C",
+            font=("Consolas", 11),
+            height=9,
+            borderwidth=0
+        )
+        event_list.pack(fill="x", pady=5)
+
+        for event in reversed(self.events):
+            event_list.insert("end", event)
+
+        self.button(
+            self.content, "MARK NEW EVENT",
+            self.mark_event, width=23
+        ).pack(pady=12)
+
+    def settings(self):
+        self.label(
+            self.content, "SYSTEM SETTINGS",
+            22, GREEN, True
+        ).pack(pady=14)
+
+        info = [
+            "DEVICE: PHANTOM MK I",
+            "OS VERSION: 0.1",
+            "PLATFORM: PYTHON DESKTOP PROTOTYPE",
+            "DISPLAY TARGET: 800 x 480",
+            "NETWORK: NO INTERNET REQUIRED",
+            "BME280: NOT CONNECTED",
+            "BMM150: NOT CONNECTED",
+            "EVENT STORAGE: CSV"
+        ]
+
+        for item in info:
+            self.label(
+                self.content, item, 12, TEXT
+            ).pack(anchor="w", pady=5)
+
+    def elapsed_seconds(self):
+        if not self.start_time:
+            return 0
+
+        return int(
+            (datetime.now() - self.start_time)
+            .total_seconds()
+        )
+
+    def toggle_session(self):
+        if self.running:
+            self.running = False
+            self.log_event("SESSION STOPPED")
+        else:
+            self.start_time = datetime.now()
+            self.running = True
+            self.log_event("SESSION STARTED")
+
+        self.draw()
+
+    def mark_event(self):
+        if not self.running:
+            messagebox.showinfo(
+                "P.H.A.N.T.O.M.",
+                "Start an investigation first."
+            )
+            return
+
+        self.log_event("MANUAL EVENT")
+        self.draw()
+
+    def log_event(self, name):
+        now = datetime.now()
+        elapsed = self.elapsed_seconds()
+
+        display = (
+            f"{now.strftime('%H:%M:%S')} | {name}"
+        )
+        self.events.append(display)
+
+        with open(
+            LOG_FILE, "a", newline=""
+        ) as file:
+            writer = csv.writer(file)
+            writer.writerow([
+                now.isoformat(timespec="seconds"),
+                name,
+                elapsed
+            ])
+
+    def tick(self):
+        if self.running and self.start_time:
+            total = self.elapsed_seconds()
+
+            hours = total // 3600
+            minutes = (total % 3600) // 60
+            seconds = total % 60
+
+            time_string = (
+                f"{hours:02}:{minutes:02}:"
+                f"{seconds:02}"
+            )
+
+            if (
+                hasattr(self, "timer_label")
+                and self.timer_label.winfo_exists()
+            ):
+                self.timer_label.config(text=time_string)
+
+        if (
+            hasattr(self, "status")
+            and self.status.winfo_exists()
+        ):
+            self.status.config(
+                text="INVESTIGATING"
+                if self.running else "STANDBY",
+                fg=GREEN if self.running else MUTED
+            )
+
+        self.root.after(250, self.tick)
+
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = PhantomOS(root)
+    root.mainloop()
