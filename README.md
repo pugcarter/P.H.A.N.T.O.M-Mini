@@ -4,4 +4,4 @@ The P.H.A.N.T.O.M Mini is a samll ghost hunting phone P. paranormal H. Hunting A
 <img width="1310" height="845" alt="aluminum-shell" src="https://github.com/user-attachments/assets/00a5e2fd-13c9-4f24-963a-0545aeb78da1" />
 <img width="485" height="413" alt="image" src="https://github.com/user-attachments/assets/1a2c7e8b-6cb4-4204-a974-0f38b4531641" />
 <img width="613" height="336" alt="image" src="https://github.com/user-attachments/assets/e99a0ed5-01ef-48f4-af8a-2a99d2d88d6e" />
-<img width="613" height="336" alt="image" src="https://github.com/user-attachments/assets/8214a4c1-4857-447e-83da-d61ac9f1ce93" />
+
