@@ -4,7 +4,7 @@ ive litteraly never used kicad and its really hard
 its remindes me of the solidworks learning curve but im getting close to finishing
 I kid you not this took like 3 hours to do :(
 
-<img width="1113" height="767" alt="full-assembly png" src="https://github.com/user-attachments/assets/45e84912-f563-4da5-a445-845bf2566f51" />
+<img width="485" height="413" alt="image" src="https://github.com/user-attachments/assets/5ec2f8cf-7602-4a6a-90d0-e671f11f2028" />
 
 
 Solidworked a case
