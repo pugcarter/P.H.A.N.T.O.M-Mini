@@ -1,3 +1,15 @@
+Screw Holes! and COVER
+solidworking a cover for the back and screw holes
+ive never made screw holes for solid works and this was hell doing
+the biggest problem was finding where they lined up im gonna have to reshearch this more but I got them lined
+
+also made the two type c holes the same
+
+<img width="613" height="336" alt="image" src="https://github.com/user-attachments/assets/487ebbe0-cb4e-4b93-b85b-6a0cc962b64e" />
+
+
+
+
 KICAD FOR FUNDING!
 I working on a kicad digram for funding
 ive litteraly never used kicad and its really hard
