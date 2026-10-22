@@ -47,3 +47,50 @@ https://www.adafruit.com/product/4685
 https://www.digikey.com/en/products/detail/same-sky-formerly-cui-devices/SJ1-3535NG/738699
 https://www.adafruit.com/product/2011
 
+
+
+Store	Item	Qty	Price
+Waveshare	ESP32-S3 4.3" touchscreen	1	$32.99
+Waveshare	BME280 environmental sensor	1	$9.99
+Waveshare	BMM150 magnetometer	1	$6.99
+Adafruit	2500mAh LiPo battery	1	$14.95
+Adafruit	Male header pack	1	$4.95
+Adafruit	M3 screws and standoffs	1	$16.95
+Pololu	3.3V voltage regulator	1	$9.95
+JLCPCB	Main custom PCB	5	$7.60
+JLCPCB	SI4732 breakout PCB	5	$4.10
+LCSC	SI4732 radio chip	1	$2.89
+Amazon	32GB microSD card	1	$12.29
+PMD Way	Headphone amplifier	1	$20.55
+DigiKey	PAM8302 speaker amplifier chip	1	$0.67
+DigiKey	PCA9536DR GPIO expander	1	$1.56
+DigiKey	8Ω 1W speaker	1	$5.54
+DigiKey	3.5mm headphone jack	1	$1.62
+DigiKey	10µF 0603 capacitor	1	$0.12
+DigiKey	100nF 0603 capacitor	1	$0.13
+DigiKey	22pF replacement capacitors	2	$0.44
+DigiKey	32.768kHz crystal	1	$0.41
+DigiKey	10µF 1206 capacitor	1	$0.23
+DigiKey	1µF 0805 capacitor	1	$0.14
+DigiKey	100nF 0805 capacitors	3	$0.30
+DigiKey	100kΩ resistors	2	$0.20
+DigiKey	10kΩ resistors	2	$0.20
+
+
+
+Store	Parts	Shipping / fees	Tax	Checkout total
+Amazon	$12.29	$0.00	$0.83	$13.12
+Pololu	$9.95	$6.95	$1.14	$18.04
+LCSC	$2.89	$10.88	—	$13.77
+JLCPCB	$11.70	$8.78	—	$20.48
+Adafruit	$36.85	Pending	$2.49	$39.34 + shipping
+Waveshare	$49.97	$11.20	—	$61.17
+DigiKey	$12.00	$8.49 + $2.53 tariff	$1.55	$24.57
+PMD Way	$20.55	Free	Pending	$20.55*
+
+
+$207.85
+
+
+
+
